@@ -2,7 +2,7 @@
 //
 const  Discord = require('discord.js');
 const bot =new  Discord.Client();
-const Youtube = require('./commandes/youtube.js');
+const Youtube = require('../youtube.js');
 //
 //debut des instructions par rapport au commande afin d'afficher des messages si on parle au bot
 //
