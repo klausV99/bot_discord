@@ -10,10 +10,10 @@ module.exports=class youtube{
         let args = msg.content.split(' ');
 
         voiceChannel.join().then(function (connection) {
-                 let stream =Ytb(args[1]);
+                 let stream =YoutubeStream(args[1]);
                  stream.on('error',function(){
-                     msg.reply("je ne trouve pas la vidéo :cry: ");
-                     connection.disconnect();});
+                     connection.disconnect();
+                 });
                  connection.playStream(stream).on('end',function(){connection.disconnect();});
 
         })

@@ -23,10 +23,6 @@ bot.on('message', function(msg){
 bot.on ('guildMemberAdd', member =>{
     member.guild.channels.get('541939693315686401').send(':star:'+member.user +' est pret a eradiquer du goblin avec la guild :star:');
 });
-//bot.on('guildBanAdd', member=>{
-  // member.guild.channels.get('547109916901638174').send('les dieux ont decidé du sort de'+member.user);
-//});
-
 //
 //login du bot grace au token
 //
