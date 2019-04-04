@@ -2,24 +2,13 @@
 //
 const  Discord = require('discord.js');
 const bot =new  Discord.Client();
-const Google = require('./commandes/google.js');
-//const Game = require('./commandes/game.js');
-const Message = require('./commandes/message.js');
 const Youtube = require('./commandes/youtube.js');
 //
 //debut des instructions par rapport au commande afin d'afficher des messages si on parle au bot
 //
-bot.on('message', function(msg){
-    if(Google.match(msg)){
-        Google.action(msg);
-    }
-    else if(Message.match(msg)){
-        Message.action(msg);
-    }
-    else if(Youtube.match(msg)){
-        Youtube.action(msg)
-    }
-});
+     if(Youtube.match(msg)) {
+         Youtube.action(msg)
+     }
 bot.on ('guildMemberAdd', member =>{
     member.guild.channels.get('541939693315686401').send(':star:'+member.user +' est pret a eradiquer du goblin avec la guild :star:');
 });

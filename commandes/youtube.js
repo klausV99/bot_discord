@@ -1,21 +1,21 @@
 const Ytb = require('ytdl-core');
 module.exports=class youtube{
-    static match(msg){
-        return msg.content.startsWith('&play');
-    }
-    static action(msg){
-       var voiceChannel= msg.guild.channels
-                        .filter(function (channel) {return channel.type === 'voice';})
-                        .first();
-        let args = msg.content.split(' ');
+     static match (message){
+         return message.content.startsWith('&play');
+     }
 
-        voiceChannel.join().then(function (connection) {
-                 let stream =YoutubeStream(args[1]);
-                 stream.on('error',function(){
-                     connection.disconnect();
-                 });
-                 connection.playStream(stream).on('end',function(){connection.disconnect();});
-
-        })
-    }
+     static action (message){
+         let voiceChannel = message.guild.channel.filter(function(channel){return channel.type === 'voice'}).first();
+         let args = message.content.split(' ');
+         voiceChannel.join().then(function(connection){
+             let stream = Ytb(args[1]);
+             stream.on('error',function(){
+                 message.reply("je n'ai pas réussi à lire la vidéo");
+                 connection.disconnect()
+             });
+             connection.playStream(stream).on('end',function(){
+                 connection.disconnect();
+             })
+         });
+     }
 };
