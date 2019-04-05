@@ -26,7 +26,7 @@ function processCommands(msg){
         case 'skip' : return guild.skipSong(msg); break;
         case 'pause' : return guild.pauseSong(); break;
         case 'resume' : return guild.resumeSong(); break;
-        case 'queue' : return guild.printQueue(msg); break;
+        case 'queue' : return guild.printQueue(msg);break;        
         case 'np' : return guild.nowPLaying(msg); break;
         case 'vol' : return guild.setVolume(msg); break;
         case 'purge': return guild.purgeQueue(msg);break;
