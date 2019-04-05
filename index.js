@@ -1,23 +1,43 @@
-//constante de départ pour la connexion ainsi que les commandes
-//
-const  Discord = require('discord.js');
-const bot =new  Discord.Client();
-const Youtube = require('../youtube.js');
-//
-//debut des instructions par rapport au commande afin d'afficher des messages si on parle au bot
-//
-     if(Youtube.match(msg)) {
-         Youtube.action(msg)
-     }
-bot.on ('guildMemberAdd', member =>{
-    member.guild.channels.get('541939693315686401').send(':star:'+member.user +' est pret a eradiquer du goblin avec la guild :star:');
+'use strict';
+const Discord=require("discord.js");
+const config =reuire("./config.json");
+const cmds = require("./commands.js");
+const music = require("./music.js");
+const tool = require("./tool.js");
+const prompt = require("prompt");
+const colors = require("colors");
+
+prompt.message = "";
+prompt.delimiter= '';
+
+const bot = new Discord.Client();
+
+bot.on('ready',()=>{
+    console.log(`${bot.user.username}strating.`);
+    console.log(`Serving ${bot.guilds.size} guilds.`);
+
+    bot.user.setGame(config.prefix + 'help');
 });
-//
-//login du bot grace au token
-//
-bot.login('NTQ2OTk1NzU3NzMxOTM4MzE1.D0wVhw.4GDdlcdENhfH5ObSdhp4F5uLnDY');
-//
-//fin de code du bot goblin_slayer
-//créer par Lefèvre Maxymilien
-//compte discord : klausV99
-//le 06/02/19
+
+bot.on('message',msg =>{
+    if(msg.author.bot || msg.channel.type != 'text')
+       return;
+    if(!msg.content.startsWith(config.prefix))
+      return;
+    let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.lenght).toLowerCase();
+    getCmdFunction(cmd)(msg);     
+});
+
+bot.on('error',(e) => console.log(e));
+bot.on('warn',(e)=>console.log(e));
+//bot.on('debug',(e)=>console.log(e));
+
+bot.login(config.token);
+
+function getCmdFunction(cmd){
+    const COMMANDS = {
+        'help' : cmds.help,
+        "music" : music.processCommands,
+    }
+    return COMMANDS[cmd] ? COMMANDS[cmd]  : () => {};
+}
