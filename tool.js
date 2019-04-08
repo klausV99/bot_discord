@@ -32,6 +32,23 @@ module.exports ={
         };
     },
     parseOptionArg(option, commandString){
-        
+        let regex = new RegExp(`--${option} (.+)`);
+
+        let matchArg = commandString.match(regex);
+        if(matchArg) {
+            return matchArg[1].slice(0,this.getNextArgIndex(matchArg[1])).trim().toLowerCase();
+        }  
+        else{
+            return null;
+        } 
+    },
+    getNextArgIndex(argString){
+        let nextArgIndex = argString.indexOf('-');
+        return nextArgIndex == -1 ? argString.length : nextArgIndex;
+    },
+
+    getUnixTime(){
+        return Math.round((new Date()).getTime() /1000);
     }
+
 }
