@@ -22,7 +22,7 @@ bot.on('ready',()=>{
 bot.on('message',msg =>{
     if(msg.author.bot || msg.channel.type != 'text')
        return;
-    if(!msg.content.startsWith('&'))
+    if(!msg.content.startsWith(config.prefix))
       return;
     let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.lenght).toLowerCase();
     getCmdFunction(cmd)(msg);     

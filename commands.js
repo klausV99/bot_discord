@@ -104,11 +104,11 @@ function help(msg) {
     }
 
     if (helpStr) 
-        msg.channel.send(helpStr, {
+        msg.channel.reply(helpStr, {
             'code': 'css'
         });
     else 
-        msg.channel.send(stripIndent(
+        msg.channel.reply(stripIndent(
             `
             [Help Menu]
                &help [command]
@@ -123,7 +123,7 @@ function help(msg) {
 
 function ban(msg) {
     if (!msg.member.hasPermission('BAN_MEMBERS')) {
-        return msg.channel.send(`Vous n'avez pas la permissions de ban !`);
+        return msg.channel.reply(`Vous n'avez pas la permissions de ban !`);
     }
     let memberToBan = msg.mentions.members.first();
     if (memberToBan && memberToBan.bannable && (msg.member.highestRole.calculatedPosition >
@@ -142,7 +142,7 @@ function ban(msg) {
 
 function kick(msg){
     if(!msg.member.hasPermisson('KICK_MEMBERS')){
-        return msg.channel.send(`Vous n'avez pas la permissions de kick !`);
+        return msg.channel.reply(`Vous n'avez pas la permissions de kick !`);
     }
     let memberToKick = msg.mentions.members.first();
     if (memberToKick && memberToKick.kickable && (msg.member.highestRole.calculatedPosition >
@@ -160,16 +160,16 @@ function choose(msg){
     });
 
     if(choices.length >= 1){
-        msg.channel.send(choices[tool.randint(choices.length)]);
+        msg.channel.reply(choices[tool.randint(choices.length)]);
     }
     else{
-        msg.channel.send(`Merci de mettre plusieurs choix`)
+        msg.channel.reply(`Merci de mettre plusieurs choix`)
     }
 }
 
 function prune(msg){
     if (!msg.member.hasPermissions('MANAGE_MESSAGES'))
-        return msg.channel.send('Vous n\'avez pas la permissions de supprimer les messages ');
+        return msg.channel.reply('Vous n\'avez pas la permissions de supprimer les messages ');
     let args = msg.content.split(/\s+/);
     let amount;
     if(args.length > 1){
@@ -180,7 +180,7 @@ function prune(msg){
     }
 
     if(amount < 1 || amount > 500)
-        return msg.channel.send(`Donner moi un montant de message a supprimer entre 1 et 500`);
+        return msg.channel.reply(`Donner moi un montant de message a supprimer entre 1 et 500`);
 
 
     let options = tool.parseOptions(msg.content);
@@ -210,9 +210,9 @@ function prune(msg){
             processAmount(amount, 0);
         } catch (err) {
             if (err.message == 'err')
-                msg.channel.send(`Desoler, je ne peut pas supprimer vos message. `);
+                msg.channel.reply(`Desoler, je ne peut pas supprimer vos message. `);
             else //err.message == 'args'
-                msg.channel.send(`Syntax invalide. Faite ${tool.wrap('!help prune')}.`)
+                msg.channel.reply(`Syntax invalide. Faite ${tool.wrap('!help prune')}.`)
         }
     }
     function processAmount(amount, prunedAmount) {
@@ -278,7 +278,7 @@ function prune(msg){
                 if (silentOption) {
                     msg.delete();
                 } else {
-                    msg.channel.send(`Nombres de  ${tool.wrap(prunedAmount)} messages supprimer.`);
+                    msg.channel.reply(`Nombres de  ${tool.wrap(prunedAmount)} messages supprimer.`);
                 }
             }
         }
