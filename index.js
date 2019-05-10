@@ -15,7 +15,7 @@ prompt.delimiter= '';
 const bot = new Discord.Client();
 
 bot.on('ready',()=>{
-    console.log(`${bot.user.username} strating.`);
+    console.log(`${bot.user.username} starting.`);
     console.log(`Serving ${bot.guilds.size} guilds.`);
 
     bot.user.setActivity(config.prefix + 'help');
@@ -27,7 +27,7 @@ bot.on('message',msg =>{
     if(!msg.content.startsWith(config.prefix))
       return; // not a command
     let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.lenght).toLowerCase();
-    getCmdFunction(cmd)(msg);     
+    getCmdFunction(cmd)(msg);
 });
 
 bot.on('error',(e) => console.log(e));

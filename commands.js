@@ -85,7 +85,7 @@ let embed_fields = [{
                 author: {
                     name: msg.author.username,
                     icon_url: msg.author.avatarUrl,
-                    url:'http://google.fr'
+                    url:'http://google.be'
                 },
                 color: 0x00FF00,
                 fields: embed_fields
@@ -111,7 +111,7 @@ function help(msg) {
         msg.channel.reply(stripIndent(
             `
             [Help Menu]
-               &help [command]
+               !help [command]
                #Utility
                   &music
             [] = optionnelle, <> = require, | = ou
